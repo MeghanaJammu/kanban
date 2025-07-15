@@ -4,9 +4,9 @@ import { FiLogIn, FiUserPlus } from "react-icons/fi";
 
 const Navbar = () => {
   return (
-    <nav className="bg-blue-700 text-white px-6 py-3 shadow-md flex justify-between items-center">
+    <nav className="bg-[#0d204c] text-[#e2e8f0] px-6 py-3 shadow-md flex justify-between items-center">
       <Link to="/" className="text-xl font-bold tracking-wide">
-        🧠 KanbanFlow
+        KanbanLite
       </Link>
 
       <div className="hidden md:flex items-center space-x-6">

@@ -2,8 +2,8 @@ import React from "react";
 
 const Register = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-700 to-pink-700">
-      <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-[#0f172a]">
+      <div className="bg-[#1e293b] p-8 rounded-2xl shadow-md w-full max-w-md text-[#e2e8f0] border border-[#334155]">
         <img
           src="https://cdn-icons-png.flaticon.com/512/5087/5087580.png"
           className="w-16 mx-auto mb-4"

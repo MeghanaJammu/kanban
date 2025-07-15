@@ -1,27 +1,41 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
-import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import { Droppable } from "@hello-pangea/dnd";
 import Card from "./Card";
 
-const List = ({ list, i }) => {
+const List = ({ list, onAddClick, onEditClick, onDeleteClick }) => {
   return (
-    <div className="bg-gray-100 rounded-xl p-4 w-80 mr-4 flex-shrink-0">
-      <h2 className="font-semibold text-lg mb-4">{list.title}</h2>
-      <Droppable droppableId={list.id}>
-        {(provided) => (
-          <div
-            className="min-h-[80px]"
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-          >
-            {list.cards.map((card, idx) => (
-              <Card key={card.id} card={card} index={idx} />
-            ))}
-            {provided.placeholder}
+    <Droppable droppableId={list.id}>
+      {(prov) => (
+        <div
+          ref={prov.innerRef}
+          {...prov.droppableProps}
+          className="bg-[#1e293b] text-[#e2e8f0] rounded-xl p-4 w-80 flex-shrink-0 border border-[#334155] flex flex-col"
+        >
+          <div className="flex justify-between items-center mb-3">
+            <h2 className="text-lg font-semibold">{list.title}</h2>
+            <button
+              onClick={() => onAddClick(list.id)}
+              className="text-sm text-[#3b82f6] hover:text-blue-400"
+            >
+              + Add
+            </button>
           </div>
-        )}
-      </Droppable>
-    </div>
+
+          <div className="flex-1">
+            {list.cards.map((card, idx) => (
+              <Card
+                key={card.id}
+                card={card}
+                index={idx}
+                onEdit={onEditClick}
+                onDelete={onDeleteClick}
+              />
+            ))}
+            {prov.placeholder}
+          </div>
+        </div>
+      )}
+    </Droppable>
   );
 };
 

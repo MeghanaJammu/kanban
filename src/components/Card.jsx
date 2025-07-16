@@ -24,7 +24,7 @@ const Card = ({ card, index, onEdit, onDelete }) => {
             <p className="text-sm text-[#94a3b8] mb-2">{card.description}</p>
           )}
           <div className="flex items-center justify-between text-xs text-[#94a3b8] mb-2">
-            {card.dueDate && <span>📅 {card.dueDate}</span>}
+            {card.dueDate && <span>📅 By {card.dueDate}</span>}
             <span
               className={`px-2 py-1 rounded ${
                 card.priority === "High"

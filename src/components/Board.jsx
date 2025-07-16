@@ -26,7 +26,6 @@ const Board = () => {
   const onDragEnd = ({ source, destination }) => {
     if (!destination) return;
 
-    // No change in position
     if (
       source.droppableId === destination.droppableId &&
       source.index === destination.index
@@ -44,10 +43,9 @@ const Board = () => {
       if (!draggedCard) return prevBoard;
 
       if (srcList.id === destList.id) {
-        //  Same list → reorder
         const newCards = [...srcList.cards];
-        newCards.splice(source.index, 1); // remove
-        newCards.splice(destination.index, 0, draggedCard); // insert
+        newCards.splice(source.index, 1);
+        newCards.splice(destination.index, 0, draggedCard); 
 
         const newLists = prevBoard.lists.map((l) =>
           l.id === srcList.id ? { ...l, cards: newCards } : l
@@ -55,7 +53,7 @@ const Board = () => {
 
         return { lists: newLists };
       } else {
-        // 🟡 Different lists → remove & insert
+      
         const newSrcCards = [...srcList.cards];
         newSrcCards.splice(source.index, 1);
 

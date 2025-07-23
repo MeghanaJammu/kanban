@@ -55,8 +55,8 @@ const Register = () => {
             Kanban Lite
           </span>
         </div>
-        <h2 className="text-2xl font-semibold text-center mb-6 text-white">
-          Create Account
+        <h2 className="text-xl font-semibold text-center mb-6 text-white">
+          Create A New Account
         </h2>
         <form onSubmit={handleRegister}>
           <input
@@ -87,7 +87,7 @@ const Register = () => {
             Register
           </button>
         </form>
-        <p className="text-sm text-center mt-4 text-gray-600">
+        <p className="text-sm text-center mt-4 text-gray-400">
           Already have an account?{" "}
           <Link to="/login" className="text-pink-600 hover:underline">
             Login

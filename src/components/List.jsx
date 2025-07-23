@@ -20,16 +20,16 @@ const List = ({
           className="bg-[#1e293b] text-[#e2e8f0] rounded-xl p-4 w-80 flex-shrink-0 border border-[#334155] flex flex-col"
         >
           <div className="flex justify-between items-center mb-3">
-            <h2 className="text-lg font-semibold">{list.title}</h2>
+            <h2 className="text-xl font-semibold">{list.title}</h2>
             <button
               onClick={() => onAddClick(list.id)}
-              className="text-sm text-[#3b82f6] hover:text-blue-400"
+              className="text-sm cursor-pointer text-[#3b82f6] hover:text-blue-400"
             >
-              + Add
+              + Add a task
             </button>
             <button
               onClick={onDeleteList}
-              className="text-sm text-red-400 hover:text-red-600"
+              className="text-sm cursor-pointer text-red-400 hover:text-red-600"
               title="Delete List"
             >
               <FiTrash2 />

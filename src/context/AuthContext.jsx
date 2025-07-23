@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
           setUser({
             uid: currentUser.uid,
             email: currentUser.email,
-            username: userData.username || "", // <== now available
+            username: userData.username || "",
           });
         } else {
           setUser({

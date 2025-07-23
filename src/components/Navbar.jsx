@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#0d204c] text-[#e2e8f0] px-6 py-3 shadow-md flex justify-between items-center">
+    <nav className="bg-[#16334f] text-[#e2e8f0] px-6 py-3 shadow-md flex justify-between items-center">
       <Link
         to="/"
         className="text-xl flex items-center gap-2 font-bold tracking-wide"
@@ -43,7 +43,7 @@ const Navbar = () => {
           </span>
           <button
             onClick={handleLogout}
-            className="ml-4 px-4 py-2 cursor-pointer text-sm font-medium text-red bg-blue-500 hover:bg-pink-900 rounded-md transition duration-200"
+            className="ml-4 px-4 py-2 cursor-pointer text-sm font-medium text-red bg-gray-600 hover:bg-pink-900 rounded-md transition duration-200"
           >
             Logout
           </button>

@@ -8,8 +8,10 @@ import { db, auth } from "../firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 const Board = () => {
+  const { boardId } = useParams();
   const [board, setBoard] = useState({ lists: [] });
   const [userId, setUserId] = useState(null);
   const [viewCard, setViewCard] = useState(null);
@@ -22,30 +24,32 @@ const Board = () => {
   // Load board on login
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
+      if (user && boardId) {
         const uid = user.uid;
         setUserId(uid);
-        const userRef = doc(db, "users", uid);
-        const userDoc = await getDoc(userRef);
-        if (userDoc.exists()) {
-          setBoard(userDoc.data().board || { lists: [] });
+        const boardRef = doc(db, "users", uid, "boards", boardId);
+        const boardDoc = await getDoc(boardRef);
+        if (boardDoc.exists()) {
+          setBoard(boardDoc.data());
         } else {
-          await setDoc(userRef, { board: { lists: [] } });
+          console.warn("Board not found.");
+          setBoard({ lists: [] });
         }
       } else {
         setUserId(null);
         setBoard({ lists: [] });
       }
     });
+
     return () => unsubscribe();
-  }, []);
+  }, [boardId]);
 
   // Save board to Firestore
   const saveBoardToDB = async (updatedBoard) => {
-    if (!userId) return;
+    if (!userId || !boardId) return;
     try {
-      const userRef = doc(db, "users", userId);
-      await setDoc(userRef, { board: updatedBoard }, { merge: true });
+      const boardRef = doc(db, "users", userId, "boards", boardId);
+      await setDoc(boardRef, updatedBoard, { merge: true });
     } catch (err) {
       console.error(err);
       toast.error("Failed to save board data.");
@@ -132,7 +136,7 @@ const Board = () => {
 
   const addNewList = () => {
     if (!newListTitle.trim()) return;
-
+    console.log("adding");
     const newList = {
       id: uuidv4(),
       title: newListTitle,
@@ -141,7 +145,7 @@ const Board = () => {
 
     const updatedBoard = {
       ...board,
-      lists: [...board.lists, newList],
+      lists: [...(board.lists || []), newList],
     };
 
     setBoard(updatedBoard);
@@ -171,7 +175,7 @@ const Board = () => {
     <div className="bg-[#0f172a] text-[#e2e8f0] min-h-screen py-6 px-2">
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="w-full max-w-7xl mx-auto flex flex-wrap gap-4 justify-center">
-          {board.lists.map((list) => (
+          {board.lists?.map((list) => (
             <List
               key={list.id}
               list={list}
@@ -185,7 +189,6 @@ const Board = () => {
         </div>
       </DragDropContext>
 
-      {/* Bottom Add List & Guidance (always at the end) */}
       <div className="flex flex-col items-center mt-6">
         <div className="bg-[#1e293b] p-4 rounded-lg w-64">
           {isAddingList ? (
@@ -217,7 +220,7 @@ const Board = () => {
           ) : (
             <button
               onClick={() => setIsAddingList(true)}
-              className="text-gray-300 hover:text-white"
+              className="text-gray-300 cursor-pointer hover:text-white"
             >
               + Add List
             </button>

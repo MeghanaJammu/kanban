@@ -53,13 +53,13 @@ const Card = ({ card, index, onEdit, onDelete, onViewDetails }) => {
             <div className="flex gap-2 text-lg">
               <button
                 onClick={() => onEdit(card)}
-                className="text-[#3b82f6] hover:text-blue-400"
+                className="text-[#3b82f6] cursor-pointer hover:text-blue-400"
               >
                 <FiEdit2 />
               </button>
               <button
                 onClick={() => onDelete(card)}
-                className="text-red-500 hover:text-red-700"
+                className="text-red-500 cursor-pointer hover:text-red-700"
               >
                 <FiTrash2 />
               </button>

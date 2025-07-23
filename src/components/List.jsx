@@ -1,5 +1,6 @@
 import React from "react";
 import { Droppable } from "@hello-pangea/dnd";
+import { FiTrash2 } from "react-icons/fi";
 import Card from "./Card";
 
 const List = ({
@@ -8,6 +9,7 @@ const List = ({
   onEditClick,
   onDeleteClick,
   onViewDetails,
+  onDeleteList,
 }) => {
   return (
     <Droppable droppableId={list.id}>
@@ -24,6 +26,13 @@ const List = ({
               className="text-sm text-[#3b82f6] hover:text-blue-400"
             >
               + Add
+            </button>
+            <button
+              onClick={onDeleteList}
+              className="text-sm text-red-400 hover:text-red-600"
+              title="Delete List"
+            >
+              <FiTrash2 />
             </button>
           </div>
 

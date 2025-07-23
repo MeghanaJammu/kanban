@@ -42,11 +42,19 @@ const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0f172a]">
       <div className="bg-[#1e293b] p-8 rounded-2xl shadow-md w-full max-w-md text-[#e2e8f0] border border-[#334155]">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/5087/5087580.png"
-          className="w-16 mx-auto mb-4"
-          alt="register"
-        />
+        <div className="text-xl flex flex-col justify-center items-center gap-2 font-bold tracking-wide mb-6">
+          <video
+            src="/kanbanLogo.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="h-20 w-20 rounded-full object-cover"
+          />
+          <span className="text-xl text-pink-700 font-bold tracking-wide">
+            Kanban Lite
+          </span>
+        </div>
         <h2 className="text-2xl font-semibold text-center mb-6 text-white">
           Create Account
         </h2>

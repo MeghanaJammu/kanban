@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import List from "./List";
 import TaskModal from "./TaskModal";
+import DetailsModal from "./DetailsModal";
 import { DragDropContext } from "@hello-pangea/dnd";
 import { dummyBoard } from "../utils/dummyData";
 import { v4 as uuidv4 } from "uuid";
@@ -13,6 +14,7 @@ const Board = () => {
     const stored = localStorage.getItem(LOCAL_KEY);
     return stored ? JSON.parse(stored) : dummyBoard;
   });
+  const [viewCard, setViewCard] = useState(null);
 
   const [isModal, setIsModal] = useState(false);
   const [targetList, setTargetList] = useState(null);
@@ -45,7 +47,7 @@ const Board = () => {
       if (srcList.id === destList.id) {
         const newCards = [...srcList.cards];
         newCards.splice(source.index, 1);
-        newCards.splice(destination.index, 0, draggedCard); 
+        newCards.splice(destination.index, 0, draggedCard);
 
         const newLists = prevBoard.lists.map((l) =>
           l.id === srcList.id ? { ...l, cards: newCards } : l
@@ -53,7 +55,6 @@ const Board = () => {
 
         return { lists: newLists };
       } else {
-      
         const newSrcCards = [...srcList.cards];
         newSrcCards.splice(source.index, 1);
 
@@ -118,6 +119,7 @@ const Board = () => {
               onAddClick={openAdd}
               onEditClick={(card) => openEdit(list.id, card)}
               onDeleteClick={(card) => onDelete(list.id, card)}
+              onViewDetails={(card) => setViewCard(card)}
             />
           ))}
         </div>
@@ -128,6 +130,11 @@ const Board = () => {
         onClose={() => setIsModal(false)}
         initialData={editCard}
         onSave={onSave}
+      />
+      <DetailsModal
+        isOpen={!!viewCard}
+        onClose={() => setViewCard(null)}
+        card={viewCard}
       />
     </div>
   );

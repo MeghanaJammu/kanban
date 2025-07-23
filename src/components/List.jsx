@@ -2,7 +2,13 @@ import React from "react";
 import { Droppable } from "@hello-pangea/dnd";
 import Card from "./Card";
 
-const List = ({ list, onAddClick, onEditClick, onDeleteClick }) => {
+const List = ({
+  list,
+  onAddClick,
+  onEditClick,
+  onDeleteClick,
+  onViewDetails,
+}) => {
   return (
     <Droppable droppableId={list.id}>
       {(prov) => (
@@ -29,6 +35,7 @@ const List = ({ list, onAddClick, onEditClick, onDeleteClick }) => {
                 index={idx}
                 onEdit={onEditClick}
                 onDelete={onDeleteClick}
+                onViewDetails={onViewDetails}
               />
             ))}
             {prov.placeholder}

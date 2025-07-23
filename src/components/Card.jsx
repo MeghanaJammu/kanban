@@ -2,7 +2,7 @@ import React from "react";
 import { Draggable } from "@hello-pangea/dnd";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 
-const Card = ({ card, index, onEdit, onDelete }) => {
+const Card = ({ card, index, onEdit, onDelete, onViewDetails }) => {
   return (
     <Draggable draggableId={card.id} index={index}>
       {(prov) => (
@@ -66,7 +66,10 @@ const Card = ({ card, index, onEdit, onDelete }) => {
             </div>
           </div>
 
-          <button className="mt-2 text-sm text-[#3b82f6] hover:underline self-start">
+          <button
+            className="mt-2 text-sm text-[#3b82f6] cursor-pointer hover:underline self-start"
+            onClick={() => onViewDetails(card)}
+          >
             See Details →
           </button>
         </div>

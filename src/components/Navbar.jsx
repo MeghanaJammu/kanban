@@ -38,7 +38,7 @@ const Navbar = () => {
           <span className="text-sm">
             Welcome ,{" "}
             <span className="font-bold text-green-500">
-              {user.username.toUpperCase()}
+              {user?.username.toUpperCase()}
             </span>
           </span>
           <button

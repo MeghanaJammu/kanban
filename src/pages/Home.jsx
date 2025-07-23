@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import { createBoard } from "../createBoard";
 import { auth, db } from "../firebase";
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -16,18 +17,26 @@ const Home = () => {
     const jwtToken = Cookies.get("jwt_token");
     if (!jwtToken) navigate("/login");
 
-    const uid = auth.currentUser?.uid;
-    if (uid) {
-      const boardsRef = collection(db, "users", uid, "boards");
-      const unsubscribe = onSnapshot(boardsRef, (snapshot) => {
-        const userBoards = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setBoards(userBoards);
-      });
-      return unsubscribe;
-    }
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const boardsRef = collection(db, "users", user.uid, "boards");
+        const unsubscribeBoards = onSnapshot(boardsRef, (snapshot) => {
+          const userBoards = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setBoards(userBoards);
+        });
+
+        // Clean up Firestore listener
+        return () => unsubscribeBoards();
+      } else {
+        navigate("/login");
+      }
+    });
+
+    // Clean up Auth listener
+    return () => unsubscribeAuth();
   }, []);
 
   const handleCreateBoard = async () => {

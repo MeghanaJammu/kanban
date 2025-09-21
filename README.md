@@ -6,6 +6,12 @@ Users can create multiple boards, manage tasks with drag & drop, and view/edit d
 
 deployed url:
 
+deployed through jenkins:
+
+https://kanbanauth.web.app/
+
+on vercel:
+
 https://kanban-1b1k.vercel.app/
 
 ## Register/login and start creating your FIRST BOARD

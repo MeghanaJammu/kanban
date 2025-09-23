@@ -1,5 +1,5 @@
 # Kanban Task Management App
-A modern, real-time Kanban task management application built with React and Firebase. This project features a clean, dark-mode UI and a complete CI/CD pipeline for automated deployments to Google Cloud.
+A modern, real-time Kanban task management application built with React and Firebase(For auth and DB and also hosting). This project features a clean, dark-mode UI and a complete CI/CD pipeline for automated deployments to Google Cloud.
 
 ## Live Demo
 The application is automatically deployed to Firebase Hosting via the Jenkins pipeline:

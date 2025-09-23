@@ -1,10 +1,8 @@
-import React, { lazy, Suspense } from "react"; // to impove performace of app,imports lazy and Suspense
+import React from "react";
+import AppRoutes from "./routes/AppRoutes";
 import Navbar from "./components/Navbar";
 import { useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-
-// Converting the static import to a lazy import
-const AppRoutes = lazy(() => import("./routes/AppRoutes"));
 
 const App = () => {
   const location = useLocation();
@@ -13,17 +11,7 @@ const App = () => {
   return (
     <div className="bg-[#0f172a] text-[#e2e8f0] min-h-screen">
       {!hideNavbarPaths.includes(location.pathname) && <Navbar />}
-
-      <Suspense
-        fallback={
-          <div className="flex justify-center items-center h-screen">
-            Loading...
-          </div>
-        }
-      >
-        <AppRoutes />
-      </Suspense>
-
+      <AppRoutes />
       <ToastContainer />
     </div>
   );
